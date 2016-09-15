@@ -1,4 +1,4 @@
-# key_transform
+# case_transform
 Extraction of the key_transform abilities of ActiveModelSerializers
 
 [![Gem Version](https://badge.fury.io/rb/case_transform.svg)](https://badge.fury.io/rb/case_transform)
