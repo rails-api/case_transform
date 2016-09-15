@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.version     = CaseTransform::VERSION
   s.platform    = Gem::Platform::RUBY
   s.license     = 'MIT'
-  s.authors     = ['L. Preston Sego III']
+  s.authors     = ['L. Preston Sego III', 'Ben Mills']
   s.email       = 'LPSego3+dev@gmail.com'
   s.homepage    = 'https://github.com/NullVoxPopuli/case_transform'
   s.summary     = "CaseTransform-#{CaseTransform::VERSION}"

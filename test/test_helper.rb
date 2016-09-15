@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 require 'bundler/setup'
 
-begin
-  require 'simplecov'
-  Coverage.start
-rescue LoadError
-  STDERR.puts 'Running without SimpleCov'
+require "codeclimate-test-reporter"
+
+if ENV['CODECLIMATE_REPO_TOKEN']
+  CodeClimate::TestReporter.start
 end
+
 
 require 'pry-byebug'
 require 'case_transform'
