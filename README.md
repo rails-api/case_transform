@@ -1,2 +1,2 @@
-# key_transform
+# json_key_transform
 Extraction of the key_transform abilities of ActiveModelSerializers
