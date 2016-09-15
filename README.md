@@ -15,12 +15,14 @@ gem 'case_transform'
 
 or
 
-```ruby
-require 'case_transform'
+```bash
+gem install case_transform
 ```
 ## Usage
 
 ```ruby
+require 'case_transform'
+
 CaseTransform.camel_lower(value)
 ```
 
