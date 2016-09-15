@@ -2,9 +2,9 @@
 require 'active_support/core_ext/hash/keys'
 require 'active_support/core_ext/string'
 
-require 'json_key_transform/version'
+require 'case_transform/version'
 
-module JsonKeyTransform
+module CaseTransform
   module_function
 
     # Transforms values to UpperCamelCase or PascalCase.

@@ -1,4 +1,4 @@
 # frozen_string_literal: true
-module JsonKeyTransform
+module CaseTransform
   VERSION = '0.1'.freeze
 end

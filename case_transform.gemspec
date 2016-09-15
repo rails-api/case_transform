@@ -5,17 +5,17 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'json_key_transform/version'
+require 'case_transform/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'json_key_transform'
-  s.version     = JsonKeyTransform::VERSION
+  s.name        = 'case_transform'
+  s.version     = CaseTransform::VERSION
   s.platform    = Gem::Platform::RUBY
   s.license     = 'MIT'
   s.authors     = ['L. Preston Sego III']
   s.email       = 'LPSego3+dev@gmail.com'
-  s.homepage    = 'https://github.com/NullVoxPopuli/json_key_transform'
-  s.summary     = "JsonKeyTransform-#{JsonKeyTransform::VERSION}"
+  s.homepage    = 'https://github.com/NullVoxPopuli/case_transform'
+  s.summary     = "CaseTransform-#{CaseTransform::VERSION}"
   s.description = 'Extraction of the key_transform abilities of ActiveModelSerializers'
 
   s.files        = Dir['CHANGELOG.md', 'LICENSE', 'README.md', 'lib/**/*']

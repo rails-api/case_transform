@@ -9,7 +9,7 @@ rescue LoadError
 end
 
 require 'pry-byebug'
-require 'json_key_transform'
+require 'case_transform'
 
 require 'minitest'
 require 'minitest/autorun'

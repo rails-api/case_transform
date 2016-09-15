@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    json_key_transform (0.1)
+    case_transform (0.1)
       activesupport
 
 GEM
@@ -58,8 +58,8 @@ PLATFORMS
 
 DEPENDENCIES
   awesome_print
+  case_transform!
   codeclimate-test-reporter
-  json_key_transform!
   minitest
   pry-byebug
   rubocop

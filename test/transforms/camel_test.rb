@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'test_helper'
 
-describe JsonKeyTransform do
+describe CaseTransform do
   describe 'Transforms' do
     describe 'camel' do
       it 'transforms to camel case (PascalCase)' do
@@ -73,7 +73,7 @@ describe JsonKeyTransform do
           }
         ]
         scenarios.each do |s|
-          result = JsonKeyTransform.camel(s[:value])
+          result = CaseTransform.camel(s[:value])
           assert_equal s[:expected], result
         end
       end

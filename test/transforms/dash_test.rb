@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'test_helper'
 
-describe JsonKeyTransform do
+describe CaseTransform do
   describe 'Transforms' do
     describe 'dash' do
       it 'transforms to dash (hyphenated words)' do
@@ -69,7 +69,7 @@ describe JsonKeyTransform do
           }
         ]
         scenarios.each do |s|
-          result = JsonKeyTransform.dash(s[:value])
+          result = CaseTransform.dash(s[:value])
           assert_equal s[:expected], result
         end
       end

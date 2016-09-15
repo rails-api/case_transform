@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'test_helper'
 
-describe JsonKeyTransform do
+describe CaseTransform do
   describe 'Transforms' do
     describe 'underscore' do
       it 'transforms to underscore (snake case)' do
@@ -73,7 +73,7 @@ describe JsonKeyTransform do
           }
         ]
         scenarios.each do |s|
-          result = JsonKeyTransform.underscore(s[:value])
+          result = CaseTransform.underscore(s[:value])
           assert_equal s[:expected], result
         end
       end
