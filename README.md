@@ -10,19 +10,22 @@ Extraction of the key_transform abilities of ActiveModelSerializers
 ## Install
 
 ```ruby
-gem 'key_transform'
+gem 'case_transform'
 ```
 
 or
 
 ```ruby
-require 'key_transform'
+require 'case_transform'
 ```
 ## Usage
 
 ```ruby
 CaseTransform.camel_lower(value)
 ```
+
+`value` can be any of Array, Hash, Symbol, or String.
+Any other object type will just be returned.
 
 ### Transforms
 
