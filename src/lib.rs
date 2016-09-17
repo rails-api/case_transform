@@ -32,14 +32,3 @@ declare_types! {
         }
     }
 }
-
-// Delete me:
-
-// use helix::{UncheckedValue, ToRust};
-//
-// impl ToString for RubyString {
-//     fn to_string(&self) -> String {
-//         let checked = self.0.to_checked().unwrap();
-//         checked.to_rust()
-//     }
-// }
