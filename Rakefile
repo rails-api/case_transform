@@ -60,7 +60,9 @@ end
 CLEAN.include('target')
 
 file 'lib/case_transform/native.bundle' => ['lib/case_transform', :cargo_build] do
-  sh 'gcc -Wl,-force_load,target/release/libcase_transform.a --shared -Wl,-undefined,dynamic_lookup -o lib/case_transform/native.bundle'
+  sh 'gcc ' \
+    '-Wl,-force_load,target/release/libcase_transform.a ' \
+    '--shared -Wl,-undefined,dynamic_lookup -o lib/case_transform/native.bundle'
 end
 CLOBBER.include('lib/case_transform/native.bundle')
 
