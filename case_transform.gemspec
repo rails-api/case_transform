@@ -25,9 +25,10 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0'
 
-  s.add_runtime_dependency 'activesupport'
-
   s.add_development_dependency 'rake'
+
+  # Rust
+  s.add_runtime_dependency 'helix_runtime'
 
   # Quality Control
   s.add_development_dependency 'rubocop'

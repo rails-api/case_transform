@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 require 'bundler/gem_tasks'
+require 'rake/clean'
+require 'rake/testtask'
+require 'bundler/setup'
 
 # rubocop config copied from AMS
 begin
@@ -47,3 +50,33 @@ task default: [:test, :rubocop]
 
 desc 'CI test task'
 task ci: [:default]
+
+directory 'target'
+directory 'lib/turbo_blank'
+
+task :cargo_build do
+  sh 'cargo build --release'
+end
+CLEAN.include('target')
+
+file 'lib/case_transform/native.bundle' => ['lib/case_transform', :cargo_build] do
+  sh 'gcc -Wl,-force_load,target/release/libcase_transform.a --shared -Wl,-undefined,dynamic_lookup -o lib/case_transform/native.bundle'
+end
+CLOBBER.include('lib/case_transform/native.bundle')
+
+task irb: 'lib/case_transform/native.bundle' do
+  exec 'irb -Ilib -rcase_transform'
+end
+
+task benchmark: 'lib/case_transform/native.bundle' do
+  exec 'ruby -Ilib benchmark.rb'
+end
+
+# Rake::TestTask.new(:test) do |t|
+#   t.libs << "test"
+#   t.libs << "lib"
+#   t.test_files = FileList['test/**/*_test.rb']
+# end
+#
+# task :test => "lib/case_transform/native.bundle"
+# task :default => :test

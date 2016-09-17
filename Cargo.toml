@@ -1,0 +1,25 @@
+[package]
+name = "turbo_blank"
+version = "0.1.0"
+authors = ["Godfrey Chan <godfreykfc@gmail.com>"]
+
+[lib]
+
+crate-type = ["staticlib"]
+
+[dependencies]
+Inflector = "0.3.1"
+
+libc = "*"
+
+[dependencies.libcruby-sys]
+
+path = "../../crates/libcruby-sys"
+
+[dependencies.helix]
+
+path = "../.."
+
+[profile.release]
+
+lto = true
