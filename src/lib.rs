@@ -11,8 +11,6 @@ use inflector::cases::camelcase::to_camel_case;
 // camel: ClassCase (PascalCase)
 use inflector::cases::classcase::to_class_case;
 
-// let camel_case_string: String = "some_string".to_string().to_camel_case();
-
 declare_types! {
     reopen class RubyString {
         def to_snake_case(self) -> String {
