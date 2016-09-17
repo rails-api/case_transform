@@ -1,7 +1,7 @@
 [package]
 name = "turbo_blank"
 version = "0.1.0"
-authors = ["Godfrey Chan <godfreykfc@gmail.com>"]
+authors = ["L. Preston Sego III <LPSego3+dev@gmail.com>"]
 
 [lib]
 
