@@ -35,27 +35,16 @@ else
   end
 end
 
-require 'rake/testtask'
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.ruby_opts = ['-r./test/test_helper.rb']
-  t.ruby_opts << ' -w' unless ENV['NO_WARN'] == 'true'
-  t.verbose = true
-end
-
-task default: [:test, :rubocop]
-
-desc 'CI test task'
-task ci: [:default]
 
 directory 'target'
 directory 'lib/turbo_blank'
 
 task :cargo_build do
   sh 'cargo build --release'
+  sh 'gcc ' \
+    '-Wl,-force_load,target/release/libcase_transform.a ' \
+    '--shared -Wl,-undefined,dynamic_lookup -o lib/case_transform/native.bundle'
 end
 CLEAN.include('target')
 
@@ -63,6 +52,7 @@ file 'lib/case_transform/native.bundle' => ['lib/case_transform', :cargo_build] 
   sh 'gcc ' \
     '-Wl,-force_load,target/release/libcase_transform.a ' \
     '--shared -Wl,-undefined,dynamic_lookup -o lib/case_transform/native.bundle'
+
 end
 CLOBBER.include('lib/case_transform/native.bundle')
 
@@ -74,11 +64,15 @@ task benchmark: 'lib/case_transform/native.bundle' do
   exec 'ruby -Ilib benchmark.rb'
 end
 
-# Rake::TestTask.new(:test) do |t|
-#   t.libs << "test"
-#   t.libs << "lib"
-#   t.test_files = FileList['test/**/*_test.rb']
-# end
+Rake::TestTask.new(:test) do |t|
+  t.libs << "test"
+  t.libs << "lib"
+  t.test_files = FileList['test/**/*_test.rb']
+end
 #
-# task :test => "lib/case_transform/native.bundle"
-# task :default => :test
+task :test => "lib/case_transform/native.bundle"
+task default: [:test, :rubocop]
+
+
+desc 'CI test task'
+task ci: [:default]
