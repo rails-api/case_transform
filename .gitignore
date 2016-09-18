@@ -1,3 +1,7 @@
+# Rust
+Cargo.lock
+/target/
+
 *.gem
 *.rbc
 /.config
