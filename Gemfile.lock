@@ -8,7 +8,7 @@ PATH
   remote: .
   specs:
     case_transform (0.1)
-      helix_runtime
+      thermite
 
 GEM
   remote: https://rubygems.org/
@@ -22,6 +22,7 @@ GEM
     docile (1.1.5)
     json (2.0.2)
     method_source (0.8.2)
+    minitar (0.5.4)
     minitest (5.9.0)
     parser (2.3.1.2)
       ast (~> 2.2)
@@ -48,6 +49,11 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.0)
     slop (3.6.0)
+    thermite (0.6.0)
+      minitar (~> 0.5)
+      rake (>= 10)
+      tomlrb (~> 1.2)
+    tomlrb (1.2.3)
     unicode-display_width (1.1.1)
 
 PLATFORMS

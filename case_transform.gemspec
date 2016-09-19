@@ -25,10 +25,10 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0'
 
-  s.add_development_dependency 'rake'
-
   # Rust
-  s.add_runtime_dependency 'helix_runtime'
+  s.add_runtime_dependency 'thermite'
+
+  s.add_development_dependency 'rake'
 
   # Quality Control
   s.add_development_dependency 'rubocop'
