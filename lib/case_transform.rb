@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 require 'case_transform/version'
+require 'thermite/config'
 
-require 'helix_runtime'
+ruby_dir = File.dirname(File.dirname(__FILE__))
+ext_dir =  ruby_dir + '/ext/case_transform'
+config = Thermite::Config.new(cargo_project_path: ext_dir, ruby_project_path: ruby_dir)
+# Do I have to use fiddle? :-\
 
-RubyString = String
-require 'case_transform/native'
 
 module CaseTransform
   module_function

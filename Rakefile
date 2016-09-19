@@ -5,7 +5,7 @@ require 'rake/testtask'
 require 'bundler/setup'
 require 'thermite/tasks'
 
-Thermite::Tasks.new
+Thermite::Tasks.new(cargo_project_path: 'ext/case_transform')
 
 # rubocop config copied from AMS
 begin
@@ -44,7 +44,7 @@ Rake::TestTask.new(:test) do |t|
   t.test_files = FileList['test/**/*_test.rb']
 end
 
-task default: [:test, :rubocop]
+task default: ['thermite:build', :test, :rubocop]
 
 desc 'CI test task'
 task ci: [:default]

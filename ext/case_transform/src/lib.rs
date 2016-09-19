@@ -2,8 +2,6 @@
 extern crate ruru;
 extern crate inflector;
 
-use ruru::{Class,RString};
-
 // // dash: kebab-case
 // use inflector::cases::kebabcase::to_kebab_case;
 // // underscore: snake_case
@@ -14,26 +12,28 @@ use ruru::{Class,RString};
 // use inflector::cases::classcase::to_class_case;
 use inflector::Inflector;
 
+use ruru::{ Class, RString };
+
 methods! (
     RString,
     itself,
 
-    fn toSnakeCase(self) -> RString {
-        self.to_string().to_snake_case()
+    fn toSnakeCase() -> String {
+        itself.to_string().to_snake_case()
     }
 
-    fn toCamelCase(self) -> RString {
-        self.to_string().to_camel_case()
+    fn toCamelCase() -> String {
+        itself.to_string().to_camel_case()
     }
 
-    fn toClassCase(self) -> RString {
-        self.to_string().to_class_case()
+    fn toClassCase() -> String {
+        itself.to_string().to_class_case()
     }
 
-    fn toKebabCase(self) -> RString {
-        self.to_string().to_kebab_case()
+    fn toKebabCase() -> String {
+        itself.to_string().to_kebab_case()
     }
-)
+);
 
 #[no_mangle]
 pub extern fn initialize_string() {

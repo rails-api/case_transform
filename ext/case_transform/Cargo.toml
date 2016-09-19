@@ -3,6 +3,9 @@ name = "case_transform"
 version = "0.1.0"
 authors = ["L. Preston Sego III <LPSego3+dev@gmail.com>"]
 
+[package.metadata.thermite]
+github_releases = true
+
 [lib]
 name = "case_transform"
 crate-type = ["dylib"]
