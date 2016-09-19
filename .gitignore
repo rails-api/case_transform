@@ -1,3 +1,8 @@
+# Rust
+Cargo.lock
+/lib/case_transform/native.bundle
+/target/
+
 *.gem
 *.rbc
 /.config

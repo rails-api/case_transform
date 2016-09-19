@@ -18,6 +18,13 @@ or
 ```bash
 gem install case_transform
 ```
+
+### Possible? Dpendencies
+
+```
+sudo apt-get install libsigsegv-dev
+```
+
 ## Usage
 
 ```ruby

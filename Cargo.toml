@@ -1,0 +1,21 @@
+[package]
+name = "case_transform"
+version = "0.1.0"
+authors = ["L. Preston Sego III <LPSego3+dev@gmail.com>"]
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
+Inflector = "0.3.1"
+libc = "*"
+helix = { git = "https://github.com/rustbridge/helix" }
+
+# [dependencies.libcruby-sys]
+# path = "./crates/libcruby-sys"
+#
+# [dependencies.helix]
+# path = "./"
+
+[profile.release]
+lto = true
