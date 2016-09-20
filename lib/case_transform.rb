@@ -2,76 +2,82 @@
 
 require 'case_transform/version'
 require 'thermite/config'
+require 'fiddle'
 
 ruby_dir = File.dirname(File.dirname(__FILE__))
 ext_dir =  ruby_dir + '/ext/case_transform'
 config = Thermite::Config.new(cargo_project_path: ext_dir, ruby_project_path: ruby_dir)
 # Do I have to use fiddle? :-\
-
+library = Fiddle.dlopen(config.ruby_extension_path)
+func = Fiddle::Function.new(
+  library['initialize_case_transform'],
+  [], Fiddle::TYPE_VOIDP
+)
+func.call
 
 module CaseTransform
   module_function
 
-    # Transforms values to UpperCamelCase or PascalCase.
-    #
-    # @example:
-    #    "some_key" => "SomeKey",
-    def camel(value)
-      case value
-      when Array then value.map { |item| camel(item) }
-      when Hash then value.deep_transform_keys! { |key| camel(key) }
-      when Symbol then camel(value.to_s).to_sym
-      when String then value.to_snake_case.to_class_case
-      else value
-      end
+  def deep_transform_keys(hash, &block)
+    result = {}
+    hash.each do |key, value|
+      result[yield(key)] = value.is_a?(Hash) ? value.deep_transform_keys(&block) : value
     end
+    result
+  end
 
-    # Transforms values to camelCase.
-    #
-    # @example:
-    #    "some_key" => "someKey",
-    def camel_lower(value)
-      case value
-      when Array then value.map { |item| camel_lower(item) }
-      when Hash then value.deep_transform_keys! { |key| camel_lower(key) }
-      when Symbol then camel_lower(value.to_s).to_sym
-      when String then value.to_snake_case.to_camel_case
-      else value
-      end
+  def transform(value, via)
+    case value
+    when Array then value.map { |item| send(via, item) }
+    when Hash then deep_transform_keys(value) { |key| send(via, key) }
+    when Symbol then send(via, value.to_s).to_sym
+    when String then yield(value)
+    else value
     end
+  end
 
-    # Transforms values to dashed-case.
-    # This is the default case for the JsonApi adapter.
-    #
-    # @example:
-    #    "some_key" => "some-key",
-    def dash(value)
-      case value
-      when Array then value.map { |item| dash(item) }
-      when Hash then value.deep_transform_keys! { |key| dash(key) }
-      when Symbol then dash(value.to_s).to_sym
-      when String then value.to_snake_case.to_kebab_case
-      else value
-      end
+  # Transforms values to UpperCamelCase or PascalCase.
+  #
+  # @example:
+  #    "some_key" => "SomeKey",
+  def camel(value)
+    transform(value, :camel) do |v|
+      v.to_snake_case.to_class_case
     end
+  end
 
-    # Transforms values to underscore_case.
-    # This is the default case for deserialization in the JsonApi adapter.
-    #
-    # @example:
-    #    "some-key" => "some_key",
-    def underscore(value)
-      case value
-      when Array then value.map { |item| underscore(item) }
-      when Hash then value.deep_transform_keys! { |key| underscore(key) }
-      when Symbol then underscore(value.to_s).to_sym
-      when String then value.to_snake_case
-      else value
-      end
+  # Transforms values to camelCase.
+  #
+  # @example:
+  #    "some_key" => "someKey",
+  def camel_lower(value)
+    transform(value, :camel_lower) do |v|
+      v.to_snake_case.to_camel_case
     end
+  end
 
-    # Returns the value unaltered
-    def unaltered(value)
-      value
+  # Transforms values to dashed-case.
+  # This is the default case for the JsonApi adapter.
+  #
+  # @example:
+  #    "some_key" => "some-key",
+  def dash(value)
+    transform(value, :dash) do |v|
+      v.to_snake_case.to_kebab_case
     end
+  end
+
+  # Transforms values to underscore_case.
+  # This is the default case for deserialization in the JsonApi adapter.
+  #
+  # @example:
+  #    "some-key" => "some_key",
+  def underscore(value)
+    transform(value, :underscore, &:to_snake_case)
+  end
+
+  # Returns the value unaltered
+  def unaltered(value)
+    value
+  end
 end
