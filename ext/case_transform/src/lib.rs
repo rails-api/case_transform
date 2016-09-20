@@ -12,7 +12,7 @@ extern crate inflector;
 // use inflector::cases::classcase::to_class_case;
 use inflector::Inflector;
 
-use ruru::{Class, RString};
+use ruru::{Class, Object, RString};
 
 methods! (
     RString,
