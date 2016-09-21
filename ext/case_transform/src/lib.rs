@@ -2,80 +2,124 @@
 extern crate ruru;
 extern crate inflector;
 
-// // dash: kebab-case
-use inflector::cases::kebabcase::to_kebab_case;
-// // underscore: snake_case
-use inflector::cases::snakecase::to_snake_case;
-// // camel_lower: camelCase
-use inflector::cases::camelcase::to_camel_case;
-// // camel: ClassCase (PascalCase)
-use inflector::cases::classcase::to_class_case;
+use inflector::cases::{camelcase, classcase, kebabcase, snakecase};
 
-use ruru::{Class, Object, RString, Hash, Array, Symbol, AnyObject, VM};
+use ruru::{Class, Object, VerifiedObject, RString, Hash, Array, Symbol, AnyObject};
 use ruru::types::ValueType;
+use ruru::result::Error as RuruError;
+
+trait Transform: Object {
+    fn transform(&self, transform_function: &Fn(String) -> String) -> AnyObject;
+}
+
+impl Transform for AnyObject {
+    fn transform(&self, _transform_function: &Fn(String) -> String) -> AnyObject {
+        self.clone()
+    }
+}
+
+impl Transform for RString {
+    fn transform(&self, transform_function: &Fn(String) -> String) -> AnyObject {
+        let result = transform_function(self.to_string();
+
+        RString::new(&result)).to_any_object()
+    }
+}
+
+impl Transform for Symbol {
+    fn transform(&self, transform_function: &Fn(String) -> String) -> AnyObject {
+        let result = transform_function(self.to_string());
+
+        Symbol::new(&result).to_any_object()
+    }
+}
+
+impl Transform for Hash {
+    fn transform(&self, transform_function: &Fn(String) -> String) -> AnyObject {
+        let mut result = Hash::new();
+
+        self.each(|key, value| {
+            let new_key = transform(key, transform_function);
+            let new_value = match value.ty() {
+                ValueType::Hash => transform(value, transform_function),
+                _ => value,
+            };
+
+            result.store(new_key, new_value);
+        });
+
+        result.to_any_object()
+    }
+}
+
+impl Transform for Array {
+    fn transform(&self, transform_function: &Fn(String) -> String) -> AnyObject {
+        // Temp hack to consume &self for iterator
+        let result = unsafe { self.to_any_object().to::<Array>() };
+
+        result.into_iter()
+            .map(|item| transform(item, transform_function))
+            .collect::<Array>()
+            .to_any_object()
+    }
+}
+
+trait TryTransform: Object {
+    fn try_transform<T>(&self,
+                        transform_function: &Fn(String) -> String)
+                        -> Result<AnyObject, RuruError>
+        where T: VerifiedObject + Transform
+    {
+        self.try_convert_to::<T>().map(|object| object.transform(transform_function))
+    }
+}
+
+impl TryTransform for AnyObject {}
+
+fn transform(object: AnyObject, key_transform: &Fn(String) -> String) -> AnyObject {
+    let result = object.try_transform::<RString>(key_transform)
+        .or_else(|_| object.try_transform::<Symbol>(key_transform))
+        .or_else(|_| object.try_transform::<Array>(key_transform))
+        .or_else(|_| object.try_transform::<Hash>(key_transform))
+        .or_else(|_| object.try_transform::<AnyObject>(key_transform));
+
+    result.unwrap()
+}
+
+fn to_pascal_case(key: String) -> String {
+    classcase::to_class_case(snakecase::to_snake_case(key))
+}
+
+fn to_camel_case(key: String) -> String {
+    camelcase::to_camel_case(snakecase::to_snake_case(key))
+}
+
+fn to_dashed_case(key: String) -> String {
+    kebabcase::to_kebab_case(snakecase::to_snake_case(key))
+}
+
+fn to_snake_case(key: String) -> String {
+    snakecase::to_snake_case(key)
+}
 
 class!(CaseTransform);
 
 methods! (
     CaseTransform,
-    itself,
+    _itself,
 
-    fn deepTransformKeys(hash: Hash, block: &Fn(String) -> String) -> Hash {
-        let result = Hash::new();
-
-        hash.unwrap().each(|key, value| {
-            let newValue = if value.ty() == ValueType::Hash { deepTransformKeys(value, block).to_any_object() } else { value };
-            let newKey = RString::new(block(key.unwrap().to_string()));
-            result.store(newKey, newValue);
-        });
-
-        result
-    }
-
-    fn transformArray(value: Array, transformMethod: &Fn(AnyObject) -> AnyObject) -> Array {
-        value.map(|item| transformMethod(item)).unwrap()
-    }
-
-    fn transformHash(value: Hash, transformMethod: &Fn(AnyObject) -> AnyObject) -> Hash {
-        deepTransformKeys(value, |key| transformMethod(key))
-    }
-
-    fn transformSymbol(value: Symbol, transformMethod: &Fn(AnyObject) -> AnyObject) -> Symbol {
-        let transformed = transformMethod(value);
-        Symbol::new(transformed);
-    }
-
-    fn transform(
-        value: AnyObject,
-        objectTransform: &Fn(AnyObject) -> AnyObject,
-        keyTransform: &Fn(String) -> String
-    ) -> AnyObject {
-        match value.unwrap().ty() {
-            ValueType::Array => transformArray(value, objectTransform).to_any_object(),
-            ValueType::Hash => transformHash(value, objectTransform).to_any_object(),
-            ValueType::Symbol => transformSymbol(value, objectTransform).to_any_object(),
-            ValueType::RString => keyTransform(value).to_any_object(),
-            ValueType::Object => value
-        }
-    }
-
-    fn toPascalCase(key: String) -> String { to_class_case(to_snake_case(key.unwrap())) }
-    fn toCamelCase(key: String) -> String { to_camel_case(to_snake_case(key.unwrap())) }
-    fn toDashedCase(key: String) -> String { to_kebab_case(to_snake_case(key.unwrap())) }
-    fn toSnakeCase(key: String) -> String { to_snake_case(key.unwrap()) }
-
-    fn camel(value: AnyObject) -> AnyObject { transform(value.unwrap().to_any_object(), &camel, &toPascalCase) }
-    fn camelLower(value: AnyObject) -> AnyObject { transform(value.unwrap().to_any_object(), &camelLower, &toCamelCase) }
-    fn dash(value: AnyObject) -> AnyObject { transform(value.unwrap().to_any_object(), &dash, &toDashedCase) }
-    fn underscore(value: AnyObject) -> AnyObject { transform(value.unwrap(), &underscore, &toSnakeCase) }
-    fn unaltered(value: AnyObject) -> AnyObject { value.unwrap().to_any_object() }
+    fn camel(object: AnyObject) -> AnyObject { transform(value.unwrap(), &to_pascal_case) }
+    fn camel_lower(object: AnyObject) -> AnyObject { transform(object.unwrap(), &to_camel_case) }
+    fn dash(object: AnyObject) -> AnyObject { transform(object.unwrap(), &to_dashed_case) }
+    fn underscore(object: AnyObject) -> AnyObject { transform(object.unwrap(), &to_snake_case) }
+    fn unaltered(object: AnyObject) -> AnyObject { object.unwrap() }
 );
 
 #[no_mangle]
-pub extern fn initialize_case_transform() {
-    Class::new("CaseTransform", None).define(|itself| {
+pub extern "C" fn initialize_case_transform() {
+    Class::from_existing("CaseTransform").define(|itself| {
         itself.def_self("camel", camel);
-        itself.def_self("camel_lower", camelLower);
+        itself.def_self("camel_lower", camel_lower);
         itself.def_self("dash", dash);
         itself.def_self("underscore", underscore);
         itself.def_self("unaltered", unaltered);
