@@ -20,9 +20,9 @@ impl Transform for AnyObject {
 
 impl Transform for RString {
     fn transform(&self, transform_function: &Fn(String) -> String) -> AnyObject {
-        let result = transform_function(self.to_string();
+        let result = transform_function(self.to_string());
 
-        RString::new(&result)).to_any_object()
+        RString::new(&result).to_any_object()
     }
 }
 
@@ -108,7 +108,7 @@ methods! (
     CaseTransform,
     _itself,
 
-    fn camel(object: AnyObject) -> AnyObject { transform(value.unwrap(), &to_pascal_case) }
+    fn camel(object: AnyObject) -> AnyObject { transform(object.unwrap(), &to_pascal_case) }
     fn camel_lower(object: AnyObject) -> AnyObject { transform(object.unwrap(), &to_camel_case) }
     fn dash(object: AnyObject) -> AnyObject { transform(object.unwrap(), &to_dashed_case) }
     fn underscore(object: AnyObject) -> AnyObject { transform(object.unwrap(), &to_snake_case) }
