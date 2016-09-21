@@ -49,12 +49,12 @@ methods! (
     fn toPascalCase(key: String) -> String { to_class_case(to_snake_case(key.unwrap())) }
     fn toCamelCase(key: String) -> String { to_camel_case(to_snake_case(key.unwrap())) }
     fn toDashedCase(key: String) -> String { to_kebab_case(to_snake_case(key.unwrap())) }
-    fn toKebabCase(key: String) -> String { to_kebab_case(to_snake_case(key.unwrap())) }
+    fn toSnakeCase(key: String) -> String { to_snake_case(key.unwrap()) }
 
     fn camel(value: AnyObject) -> AnyObject { transform(value.unwrap().to_any_object(), &camel, &toPascalCase) }
     fn camelLower(value: AnyObject) -> AnyObject { transform(value.unwrap().to_any_object(), &camelLower, &toCamelCase) }
     fn dash(value: AnyObject) -> AnyObject { transform(value.unwrap().to_any_object(), &dash, &toDashedCase) }
-    fn underscore(value: AnyObject) -> AnyObject { transform(value.unwrap(), &underscore, &toKebabCase) }
+    fn underscore(value: AnyObject) -> AnyObject { transform(value.unwrap(), &underscore, &toSnakeCase) }
     fn unaltered(value: AnyObject) -> AnyObject { value.unwrap().to_any_object() }
 );
 
