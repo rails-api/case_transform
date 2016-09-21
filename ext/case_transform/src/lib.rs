@@ -32,15 +32,28 @@ methods! (
         result
     }
 
+    fn transformArray(value: Array, transformMethod: &Fn(AnyObject) -> AnyObject) -> Array {
+        value.map(|item| transformMethod(item)).unwrap()
+    }
+
+    fn transformHash(value: Hash, transformMethod: &Fn(AnyObject) -> AnyObject) -> Hash {
+        deepTransformKeys(value, |key| transformMethod(key))
+    }
+
+    fn transformSymbol(value: Symbol, transformMethod: &Fn(AnyObject) -> AnyObject) -> Symbol {
+        let transformed = transformMethod(value);
+        Symbol::new(transformed);
+    }
+
     fn transform(
         value: AnyObject,
         objectTransform: &Fn(AnyObject) -> AnyObject,
         keyTransform: &Fn(String) -> String
     ) -> AnyObject {
         match value.unwrap().ty() {
-            ValueType::Array => value.map(|item| objectTransform(item)).to_any_object(),
-            ValueType::Hash => deepTransformKeys(value, &|key| objectTransform(key)).to_any_object(),
-            ValueType::Symbol => Symbol::new(objectTransform(value.to_string)).to_any_object(),
+            ValueType::Array => transformArray(value, objectTransform).to_any_object(),
+            ValueType::Hash => transformHash(value, objectTransform).to_any_object(),
+            ValueType::Symbol => transformSymbol(value, objectTransform).to_any_object(),
             ValueType::RString => keyTransform(value).to_any_object(),
             ValueType::Object => value
         }
