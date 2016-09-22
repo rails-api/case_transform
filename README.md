@@ -18,6 +18,7 @@ or
 ```bash
 gem install case_transform
 ```
+
 ## Usage
 
 ```ruby

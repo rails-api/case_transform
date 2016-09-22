@@ -1,0 +1,18 @@
+[package]
+name = "case_transform"
+version = "0.1.0"
+authors = ["L. Preston Sego III <LPSego3+dev@gmail.com>"]
+repository = "https://github.com/NullVoxPopuli/case_transform"
+
+[package.metadata.thermite]
+github_releases = true
+github_release_type = "latest"
+
+[lib]
+name = "case_transform"
+crate-type = ["dylib"]
+
+[dependencies]
+# Inflector = "0.3.1"
+inflections = { git = "https://github.com/calebmer/inflections" }
+ruru = "0.8.0"

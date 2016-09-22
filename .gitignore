@@ -1,5 +1,12 @@
+# Rust
+Cargo.lock
+Gemfile.lock
+/lib/case_transform/native.bundle
+target/
+
 *.gem
 *.rbc
+mkmf.log
 /.config
 /coverage/
 /InstalledFiles

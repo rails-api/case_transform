@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.version     = CaseTransform::VERSION
   s.platform    = Gem::Platform::RUBY
   s.license     = 'MIT'
-  s.authors     = ['L. Preston Sego III', 'Ben Mills']
+  s.authors     = ['L. Preston Sego III', 'Ben Mills', 'Dmitry Gritsay']
   s.email       = 'LPSego3+dev@gmail.com'
   s.homepage    = 'https://github.com/NullVoxPopuli/case_transform'
   s.summary     = "CaseTransform-#{CaseTransform::VERSION}"
@@ -25,7 +25,8 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0'
 
-  s.add_runtime_dependency 'activesupport'
+  # Rust
+  s.add_runtime_dependency 'thermite'
 
   s.add_development_dependency 'rake'
 
@@ -37,4 +38,8 @@ Gem::Specification.new do |s|
   # Debugging
   s.add_development_dependency 'awesome_print'
   s.add_development_dependency 'pry-byebug'
+
+  # Benchmarking
+  s.add_development_dependency 'benchmark-ips'
+  s.add_development_dependency 'activesupport'
 end

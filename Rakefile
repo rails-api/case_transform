@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 require 'bundler/gem_tasks'
+require 'rake/clean'
+require 'rake/testtask'
+require 'bundler/setup'
+require 'thermite/tasks'
+
+Thermite::Tasks.new(cargo_project_path: 'ext/case_transform')
 
 # rubocop config copied from AMS
 begin
@@ -32,18 +38,13 @@ else
   end
 end
 
-require 'rake/testtask'
-
 Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
   t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.ruby_opts = ['-r./test/test_helper.rb']
-  t.ruby_opts << ' -w' unless ENV['NO_WARN'] == 'true'
-  t.verbose = true
+  t.libs << 'lib'
+  t.test_files = FileList['test/**/*_test.rb']
 end
 
-task default: [:test, :rubocop]
+task default: ['thermite:build', :test, :rubocop]
 
 desc 'CI test task'
 task ci: [:default]
