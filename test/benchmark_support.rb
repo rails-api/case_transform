@@ -8,7 +8,6 @@ require 'pry-byebug'
 module Benchmark
   module CaseTransform
     def bench(label = nil, time: 10, disable_gc: true, warmup: 3, rust: nil, ruby: nil)
-
       if disable_gc
         GC.disable
       else
