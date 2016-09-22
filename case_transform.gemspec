@@ -41,5 +41,5 @@ Gem::Specification.new do |s|
 
   # Benchmarking
   s.add_development_dependency 'benchmark-ips'
-  s.add_development_dependency 'active_support'
+  s.add_development_dependency 'activesupport'
 end

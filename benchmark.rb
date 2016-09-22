@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative './test/benchmark_support'
 require_relative './test/ruby_case_transform'
 require_relative './lib/case_transform'
@@ -17,42 +18,27 @@ hash = {
   }
 }
 
-Benchmark.bench('CaseTransform: camel', time: time, disable_gc: disable_gc) do
-  CaseTransform.camel(hash)
-end
+Benchmark.bench('camel',
+  time: time, disable_gc: disable_gc,
+  rust: -> { CaseTransform.camel(hash) },
+  ruby: -> { RubyCaseTransform.camel(hash) })
 
-Benchmark.bench('Pure Ruby: camel', time: time, disable_gc: disable_gc) do
-  RubyCaseTransform.camel(hash)
-end
+Benchmark.bench('camel_lower',
+  time: time, disable_gc: disable_gc,
+  rust: -> { CaseTransform.camel_lower(hash) },
+  ruby: -> { RubyCaseTransform.camel_lower(hash) })
 
-Benchmark.bench('CaseTransform: camel_lower', time: time, disable_gc: disable_gc) do
-  CaseTransform.camel_lower(hash)
-end
+Benchmark.bench('dash',
+  time: time, disable_gc: disable_gc,
+  rust: -> { CaseTransform.dash(hash) },
+  ruby: -> { RubyCaseTransform.dash(hash) })
 
-Benchmark.bench('Pure Ruby: camel_lower', time: time, disable_gc: disable_gc) do
-  RubyCaseTransform.camel_lower(hash)
-end
+Benchmark.bench('unaltered',
+  time: time, disable_gc: disable_gc,
+  rust: -> { CaseTransform.unaltered(hash) },
+  ruby: -> { RubyCaseTransform.unaltered(hash) })
 
-Benchmark.bench('CaseTransform: dash', time: time, disable_gc: disable_gc) do
-  CaseTransform.dash(hash)
-end
-
-Benchmark.bench('Pure Ruby: dash', time: time, disable_gc: disable_gc) do
-  RubyCaseTransform.dash(hash)
-end
-
-Benchmark.bench('CaseTransform: unaltered', time: time, disable_gc: disable_gc) do
-  CaseTransform.unaltered(hash)
-end
-
-Benchmark.bench('Pure Ruby: unaltered', time: time, disable_gc: disable_gc) do
-  RubyCaseTransform.unaltered(hash)
-end
-
-Benchmark.bench('CaseTransform: underscore', time: time, disable_gc: disable_gc) do
-  CaseTransform.underscore(hash)
-end
-
-Benchmark.bench('Pure Ruby: underscore', time: time, disable_gc: disable_gc) do
-  RubyCaseTransform.underscore(hash)
-end
+Benchmark.bench('underscore',
+  time: time, disable_gc: disable_gc,
+  rust: -> { CaseTransform.underscore(hash) },
+  ruby: -> { RubyCaseTransform.underscore(hash) })

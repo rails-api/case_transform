@@ -1,8 +1,9 @@
 #[macro_use]
 extern crate ruru;
-extern crate inflector;
+extern crate inflections;
 
-use inflector::cases::{camelcase, classcase, kebabcase, snakecase};
+// use inflector::cases::{camelcase, classcase, kebabcase, snakecase};
+use inflections::Inflect;
 
 use ruru::{Class, Object, VerifiedObject, RString, Hash, Array, Symbol, AnyObject};
 use ruru::types::ValueType;
@@ -87,19 +88,23 @@ fn transform(object: AnyObject, key_transform: &Fn(String) -> String) -> AnyObje
 }
 
 fn to_pascal_case(key: String) -> String {
-    classcase::to_class_case(snakecase::to_snake_case(key))
+    // classcase::to_class_case(key)
+    key.to_pascal_case()
 }
 
 fn to_camel_case(key: String) -> String {
-    camelcase::to_camel_case(snakecase::to_snake_case(key))
+    // camelcase::to_camel_case(key)
+    key.to_camel_case()
 }
 
 fn to_dashed_case(key: String) -> String {
-    kebabcase::to_kebab_case(snakecase::to_snake_case(key))
+    // kebabcase::to_kebab_case(key)
+    key.to_kebab_case()
 }
 
 fn to_snake_case(key: String) -> String {
-    snakecase::to_snake_case(key)
+    // snakecase::to_snake_case(key)
+    key.to_snake_case()
 }
 
 class!(CaseTransform);
