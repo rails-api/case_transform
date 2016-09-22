@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 require 'case_transform/version'
+if $case_result
+  $case_result
+else
+
 require 'thermite/config'
 require 'fiddle'
+
 
 ruby_dir = File.dirname(File.dirname(__FILE__))
 ext_dir =  ruby_dir + '/ext/case_transform'
@@ -13,4 +18,5 @@ func = Fiddle::Function.new(
   library['initialize_case_transform'],
   [], Fiddle::TYPE_VOIDP
 )
-func.call
+$case_result = func.call
+end

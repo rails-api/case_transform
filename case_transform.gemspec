@@ -38,4 +38,8 @@ Gem::Specification.new do |s|
   # Debugging
   s.add_development_dependency 'awesome_print'
   s.add_development_dependency 'pry-byebug'
+
+  # Benchmarking
+  s.add_development_dependency 'benchmark-ips'
+  s.add_development_dependency 'active_support'
 end
