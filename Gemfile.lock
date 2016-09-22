@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    case_transform (0.1)
+    case_transform (0.2)
       activesupport
 
 GEM
