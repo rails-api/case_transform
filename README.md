@@ -18,6 +18,8 @@ or
 ```bash
 gem install case_transform
 ```
+
+And for faster performance, checkout [Case Transform with Native Extensions](https://github.com/NullVoxPopuli/case_transform-rust-extensions)
 ## Usage
 
 ```ruby
