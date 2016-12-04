@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.authors     = ['L. Preston Sego III', 'Ben Mills']
   s.email       = 'LPSego3+dev@gmail.com'
-  s.homepage    = 'https://github.com/NullVoxPopuli/case_transform'
+  s.homepage    = 'https://github.com/rails-api/case_transform'
   s.summary     = "CaseTransform-#{CaseTransform::VERSION}"
   s.description = 'Extraction of the key_transform abilities of ActiveModelSerializers'
 
