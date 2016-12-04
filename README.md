@@ -2,10 +2,10 @@
 Extraction of the key_transform abilities of ActiveModelSerializers
 
 [![Gem Version](https://badge.fury.io/rb/case_transform.svg)](https://badge.fury.io/rb/case_transform)
-[![Build Status](https://travis-ci.org/NullVoxPopuli/case_transform.svg?branch=master)](https://travis-ci.org/NullVoxPopuli/case_transform)
+[![Build Status](https://travis-ci.org/rails-api/case_transform.svg?branch=master)](https://travis-ci.org/rails-api/case_transform)
 [![Code Climate](https://codeclimate.com/repos/57dafbcc628330006c001312/badges/5f190457aba7c5d5d78c/gpa.svg)](https://codeclimate.com/repos/57dafbcc628330006c001312/feed)
 [![Test Coverage](https://codeclimate.com/repos/57dafbcc628330006c001312/badges/5f190457aba7c5d5d78c/coverage.svg)](https://codeclimate.com/repos/57dafbcc628330006c001312/coverage)
-[![Dependency Status](https://gemnasium.com/NullVoxPopuli/case_transform.svg)](https://gemnasium.com/NullVoxPopuli/case_transform)
+[![Dependency Status](https://gemnasium.com/rails-api/case_transform.svg)](https://gemnasium.com/rails-api/case_transform)
 
 ## Install
 
