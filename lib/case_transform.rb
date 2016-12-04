@@ -66,7 +66,7 @@ module CaseTransform
       when Array then value.map { |item| send(method_name, item) }
       when Hash then value.deep_transform_keys! { |key| send(method_name, key) }
       when Symbol then send(method_name, value.to_s).to_sym
-      when String then underscore_cache[value] ||= yield(value)
+      when String then send("#{method_name}_cache")[value] ||= yield(value)
       else value
       end
     end

@@ -25,6 +25,10 @@ Style/StringLiterals:
 Metrics/AbcSize:
   Max: 35 # TODO: Lower to 15
 
+Metrics/BlockLength:
+  Exclude:
+    - test/**/*
+
 Metrics/ClassLength:
   Max: 261 # TODO: Lower to 100
   Exclude:
