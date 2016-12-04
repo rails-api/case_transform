@@ -27,13 +27,7 @@ module CaseTransform
     # @example:
     #    "some_key" => "SomeKey",
     def camel(value)
-      case value
-      when Array then value.map { |item| camel(item) }
-      when Hash then value.deep_transform_keys! { |key| camel(key) }
-      when Symbol then camel(value.to_s).to_sym
-      when String then camel_cache[value] ||= value.underscore.camelize
-      else value
-      end
+      transform_helper(:camel, value) { |v| v.underscore.camelize }
     end
 
     # Transforms values to camelCase.
@@ -41,13 +35,7 @@ module CaseTransform
     # @example:
     #    "some_key" => "someKey",
     def camel_lower(value)
-      case value
-      when Array then value.map { |item| camel_lower(item) }
-      when Hash then value.deep_transform_keys! { |key| camel_lower(key) }
-      when Symbol then camel_lower(value.to_s).to_sym
-      when String then camel_lower_cache[value] ||= value.underscore.camelize(:lower)
-      else value
-      end
+      transform_helper(:camel_lower, value) { |v| v.underscore.camelize(:lower) }
     end
 
     # Transforms values to dashed-case.
@@ -56,13 +44,7 @@ module CaseTransform
     # @example:
     #    "some_key" => "some-key",
     def dash(value)
-      case value
-      when Array then value.map { |item| dash(item) }
-      when Hash then value.deep_transform_keys! { |key| dash(key) }
-      when Symbol then dash(value.to_s).to_sym
-      when String then dash_cache[value] ||= value.underscore.dasherize
-      else value
-      end
+      transform_helper(:dash, value) { |v| v.underscore.dasherize }
     end
 
     # Transforms values to underscore_case.
@@ -71,18 +53,22 @@ module CaseTransform
     # @example:
     #    "some-key" => "some_key",
     def underscore(value)
-      case value
-      when Array then value.map { |item| underscore(item) }
-      when Hash then value.deep_transform_keys! { |key| underscore(key) }
-      when Symbol then underscore(value.to_s).to_sym
-      when String then underscore_cache[value] ||= value.underscore
-      else value
-      end
+      transform_helper(:underscore, value, &:underscore)
     end
 
     # Returns the value unaltered
     def unaltered(value)
       value
+    end
+
+    def transform_helper(method_name, value)
+      case value
+      when Array then value.map { |item| send(method_name, item) }
+      when Hash then value.deep_transform_keys! { |key| send(method_name, key) }
+      when Symbol then send(method_name, value.to_s).to_sym
+      when String then underscore_cache[value] ||= yield(value)
+      else value
+      end
     end
   end
 end
