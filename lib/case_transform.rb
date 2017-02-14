@@ -29,7 +29,7 @@ module CaseTransform
     def camel(value)
       case value
       when Array then value.map { |item| camel(item) }
-      when Hash then value.deep_transform_keys! { |key| camel(key) }
+      when Hash then value.deep_transform_keys { |key| camel(key) }
       when Symbol then camel(value.to_s).to_sym
       when String then camel_cache[value] ||= value.underscore.camelize
       else value
@@ -43,7 +43,7 @@ module CaseTransform
     def camel_lower(value)
       case value
       when Array then value.map { |item| camel_lower(item) }
-      when Hash then value.deep_transform_keys! { |key| camel_lower(key) }
+      when Hash then value.deep_transform_keys { |key| camel_lower(key) }
       when Symbol then camel_lower(value.to_s).to_sym
       when String then camel_lower_cache[value] ||= value.underscore.camelize(:lower)
       else value
@@ -58,7 +58,7 @@ module CaseTransform
     def dash(value)
       case value
       when Array then value.map { |item| dash(item) }
-      when Hash then value.deep_transform_keys! { |key| dash(key) }
+      when Hash then value.deep_transform_keys { |key| dash(key) }
       when Symbol then dash(value.to_s).to_sym
       when String then dash_cache[value] ||= value.underscore.dasherize
       else value
@@ -73,7 +73,7 @@ module CaseTransform
     def underscore(value)
       case value
       when Array then value.map { |item| underscore(item) }
-      when Hash then value.deep_transform_keys! { |key| underscore(key) }
+      when Hash then value.deep_transform_keys { |key| underscore(key) }
       when Symbol then underscore(value.to_s).to_sym
       when String then underscore_cache[value] ||= value.underscore
       else value
