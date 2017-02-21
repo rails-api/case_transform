@@ -22,6 +22,10 @@ module CaseTransform
       @underscore_cache ||= {}
     end
 
+    def underscore_without_question_mark_cache
+      @underscore_without_question_mark ||= {}
+    end
+
     # Transforms values to UpperCamelCase or PascalCase.
     #
     # @example:
@@ -76,6 +80,20 @@ module CaseTransform
       when Hash then value.deep_transform_keys! { |key| underscore(key) }
       when Symbol then underscore(value.to_s).to_sym
       when String then underscore_cache[value] ||= value.underscore
+      else value
+      end
+    end
+
+    # Transforms values to underscore_case and removed question marks from boolean methods.
+    #
+    # @example:
+    #    "some-key?" => "some_key",
+    def underscore_without_question_mark(value)
+      case value
+      when Array then value.map { |item| underscore_without_question_mark(item) }
+      when Hash then value.deep_transform_keys! { |key| underscore_without_question_mark(key) }
+      when Symbol then underscore_without_question_mark(value.to_s).to_sym
+      when String then underscore_without_question_mark_cache[value] ||= value.underscore.sub(/\?\z/, '')
       else value
       end
     end
