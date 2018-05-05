@@ -25,16 +25,7 @@ Gem::Specification.new do |s|
 
   s.required_ruby_version = '>= 2.0'
 
-  s.add_runtime_dependency 'activesupport'
-
   s.add_development_dependency 'rake'
-
-  # Quality Control
-  s.add_development_dependency 'rubocop'
-  s.add_development_dependency 'codeclimate-test-reporter'
-  s.add_development_dependency 'minitest'
-
-  # Debugging
-  s.add_development_dependency 'awesome_print'
-  s.add_development_dependency 'pry-byebug'
+  s.add_development_dependency 'rspec'
+  s.add_development_dependency 'pry'
 end
