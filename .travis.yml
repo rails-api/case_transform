@@ -1,3 +1,6 @@
+env:
+  global:
+    - CC_TEST_REPORTER_ID=7eaf794e2ffbbd1bbe4eccd967a5428a6318cad2a33b8fd0baf42d6335a334a0
 language: ruby
 bundler_args: --without guard guard-rspec
 rvm:
