@@ -1,17 +1,8 @@
 # frozen_string_literal: true
-require 'bundler/gem_tasks'
-require 'rake/testtask'
 
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.ruby_opts = ['-r./test/test_helper.rb']
-  t.ruby_opts << ' -w' unless ENV['NO_WARN'] == 'true'
-  t.verbose = true
-end
+require "bundler/gem_tasks"
+require "rspec/core/rake_task"
 
-task default: [:test]
+RSpec::Core::RakeTask.new(:spec)
 
-desc 'CI test task'
-task ci: [:default]
+task default: :spec
