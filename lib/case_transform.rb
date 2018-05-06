@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+require 'case_transform/hash_ext'
+require 'case_transform/string_ext'
 require 'case_transform/version'
 
 module CaseTransform
@@ -25,11 +27,16 @@ module CaseTransform
     #    "some_key" => "SomeKey",
     def camel(value)
       case value
-      when Array then value.map { |item| camel(item) }
-      when Hash then value.deep_transform_keys! { |key| camel(key) }
-      when Symbol then camel(value.to_s).to_sym
-      when String then camel_cache[value] ||= value.underscore.camelize
-      else value
+      when Array
+        value.map { |item| camel(item) }
+      when Hash
+        hash_ext.deep_transform_keys!(value) { |key| camel(key) }
+      when Symbol
+        camel(value.to_s).to_sym
+      when String
+        camel_cache[value] ||= string_ext.camelize(string_ext.underscore(value))
+      else
+        value
       end
     end
 
@@ -39,11 +46,16 @@ module CaseTransform
     #    "some_key" => "someKey",
     def camel_lower(value)
       case value
-      when Array then value.map { |item| camel_lower(item) }
-      when Hash then value.deep_transform_keys! { |key| camel_lower(key) }
-      when Symbol then camel_lower(value.to_s).to_sym
-      when String then camel_lower_cache[value] ||= value.underscore.camelize(:lower)
-      else value
+      when Array
+        value.map { |item| camel_lower(item) }
+      when Hash
+        hash_ext.deep_transform_keys!(value) { |key| camel_lower(key) }
+      when Symbol
+        camel_lower(value.to_s).to_sym
+      when String
+        camel_lower_cache[value] ||= string_ext.camelize(string_ext.underscore(value), :lower)
+      else
+        value
       end
     end
 
@@ -54,11 +66,16 @@ module CaseTransform
     #    "some_key" => "some-key",
     def dash(value)
       case value
-      when Array then value.map { |item| dash(item) }
-      when Hash then value.deep_transform_keys! { |key| dash(key) }
-      when Symbol then dash(value.to_s).to_sym
-      when String then dash_cache[value] ||= value.underscore.dasherize
-      else value
+      when Array
+        value.map { |item| dash(item) }
+      when Hash
+        hash_ext.deep_transform_keys!(value) { |key| dash(key) }
+      when Symbol
+        dash(value.to_s).to_sym
+      when String
+        dash_cache[value] ||= string_ext.dasherize(string_ext.underscore(value))
+      else
+        value
       end
     end
 
@@ -69,17 +86,27 @@ module CaseTransform
     #    "some-key" => "some_key",
     def underscore(value)
       case value
-      when Array then value.map { |item| underscore(item) }
-      when Hash then value.deep_transform_keys! { |key| underscore(key) }
-      when Symbol then underscore(value.to_s).to_sym
-      when String then underscore_cache[value] ||= value.underscore
-      else value
+      when Array
+        value.map { |item| underscore(item) }
+      when Hash
+        hash_ext.deep_transform_keys!(value) { |key| underscore(key) }
+      when Symbol
+        underscore(value.to_s).to_sym
+      when String
+        underscore_cache[value] ||= string_ext.underscore(value)
+      else
+        value
       end
     end
 
-    # Returns the value unaltered
-    def unaltered(value)
-      value
+    private
+
+    def string_ext
+      @string_ext ||= CaseTransform::StringExt.new
+    end
+
+    def hash_ext
+      @hash_ext ||= CaseTransform::HashExt.new
     end
   end
 end
