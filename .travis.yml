@@ -1,5 +1,5 @@
 language: ruby
-bundler_args: --without guard
+bundler_args: --without guard guard-rspec
 rvm:
   - "2.3.0"
   - "2.3.1"
