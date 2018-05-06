@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    case_transform (0.2)
+    case_transform2 (0.2)
 
 GEM
   remote: https://rubygems.org/
@@ -71,13 +71,13 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  case_transform!
+  case_transform2!
   guard
   guard-rspec
-  pry
-  rake
-  rspec
-  simplecov
+  pry (~> 0.10.4)
+  rake (~> 11.2.2)
+  rspec (~> 3.7.0)
+  simplecov (~> 0.16.1)
 
 BUNDLED WITH
    1.16.1
