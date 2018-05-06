@@ -1,7 +1,6 @@
 language: ruby
 bundler_args: --without guard guard-rspec
 rvm:
-  - "2.2.2"
   - "2.3.7"
   - "2.4.4"
   - "2.5.1"
