@@ -3,6 +3,7 @@
 module CaseTransform
   # String class extension
   # Stolen from ActiveSupport::Inflector.camelize
+  # @api private
   class StringExt
     def camelize(string, first_letter = :upper)
       raise ArgumentError, "Argument can not be nil" unless %i[upper lower].include?(first_letter)

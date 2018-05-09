@@ -1,29 +1,14 @@
 # frozen_string_literal: true
-require 'case_transform/hash_ext'
-require 'case_transform/string_ext'
-require 'case_transform/version'
+
+require "case_transform/hash_ext"
+require "case_transform/string_ext"
+require "case_transform/version"
 
 module CaseTransform
   class << self
-    def camel_cache
-      @camel_cache ||= {}
-    end
-
-    def camel_lower_cache
-      @camel_lower_cache ||= {}
-    end
-
-    def dash_cache
-      @dash_cache ||= {}
-    end
-
-    def underscore_cache
-      @underscore_cache ||= {}
-    end
-
     # Transforms values to UpperCamelCase or PascalCase.
     #
-    # @example:
+    # @example
     #    "some_key" => "SomeKey",
     def camel(value)
       case value
@@ -42,7 +27,7 @@ module CaseTransform
 
     # Transforms values to camelCase.
     #
-    # @example:
+    # @example
     #    "some_key" => "someKey",
     def camel_lower(value)
       case value
@@ -60,9 +45,8 @@ module CaseTransform
     end
 
     # Transforms values to dashed-case.
-    # This is the default case for the JsonApi adapter.
     #
-    # @example:
+    # @example
     #    "some_key" => "some-key",
     def dash(value)
       case value
@@ -80,9 +64,8 @@ module CaseTransform
     end
 
     # Transforms values to underscore_case.
-    # This is the default case for deserialization in the JsonApi adapter.
     #
-    # @example:
+    # @example
     #    "some-key" => "some_key",
     def underscore(value)
       case value
@@ -107,6 +90,22 @@ module CaseTransform
 
     def hash_ext
       @hash_ext ||= CaseTransform::HashExt.new
+    end
+
+    def camel_cache
+      @camel_cache ||= {}
+    end
+
+    def camel_lower_cache
+      @camel_lower_cache ||= {}
+    end
+
+    def dash_cache
+      @dash_cache ||= {}
+    end
+
+    def underscore_cache
+      @underscore_cache ||= {}
     end
   end
 end

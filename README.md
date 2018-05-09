@@ -1,11 +1,11 @@
 <!-- vim-markdown-toc GFM -->
 
 + [case_transform2](#case_transform2)
-        * [Why](#why)
-        * [Install](#install)
-        * [Usage](#usage)
-        * [Transforms](#transforms)
-        * [NOTE](#note)
+  * [Why](#why)
+  * [Install](#install)
+  * [Usage](#usage)
+  * [Transforms](#transforms)
+  * [NOTE](#note)
 
 <!-- vim-markdown-toc -->
 
@@ -71,4 +71,4 @@ Any other object type will just be returned.
 
 There is no `CaseTransform.unaltered` method like the original gem has
 
-License MIT
+License: See LICENSE.txt file

@@ -36,7 +36,8 @@ RSpec.describe(CaseTransform) do
           { value: nil,
             expected: nil },
           { value: [{ some_value: "value" }],
-            expected: [{ SomeValue: "value" }] }]
+            expected: [{ SomeValue: "value" }] }
+        ]
         scenarios.each do |s|
           result = CaseTransform.camel(s[:value])
           expect(result).to(eq(s[:expected]))
