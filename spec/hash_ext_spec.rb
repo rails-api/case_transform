@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe CaseTransform::HashExt do
+RSpec.describe CaseTransform2::HashExt do
   it do
     hash = { foo: "Bar" }
     subject.deep_transform_keys!(hash) { |k| "_#{k}".to_sym }

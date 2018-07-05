@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require("spec_helper")
-RSpec.describe(CaseTransform) do
+RSpec.describe(CaseTransform2) do
   describe("Transforms") do
     describe("camel") do
       it("transforms to camel case (PascalCase)") do
@@ -39,7 +39,7 @@ RSpec.describe(CaseTransform) do
             expected: [{ SomeValue: "value" }] }
         ]
         scenarios.each do |s|
-          result = CaseTransform.camel(s[:value])
+          result = CaseTransform2.camel(s[:value])
           expect(result).to(eq(s[:expected]))
         end
       end

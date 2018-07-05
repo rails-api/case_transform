@@ -1,11 +1,12 @@
 <!-- vim-markdown-toc GFM -->
 
 + [case_transform2](#case_transform2)
-  * [Why](#why)
-  * [Install](#install)
-  * [Usage](#usage)
-  * [Transforms](#transforms)
-  * [NOTE](#note)
+        * [Why](#why)
+        * [Install](#install)
+        * [Warning](#warning)
+        * [Usage](#usage)
+        * [Transforms](#transforms)
+        * [NOTE](#note)
 
 <!-- vim-markdown-toc -->
 
@@ -37,22 +38,27 @@ or
 gem install case_transform2
 ```
 
+## Warning
+
+if you use 0.x version and want to upgrade to newest version
+you *must* rename all CaseTransform to be CaseTransform2
+
 ## Usage
 
 ```ruby
 require 'case_transform2'
 
 value = "hello_world"
-CaseTransform.camel_lower(value) # => helloWorld
+CaseTransform2.camel_lower(value) # => helloWorld
 
 value = "hello_world"
-CaseTransform.camel(value) # => HelloWorld
+CaseTransform2.camel(value) # => HelloWorld
 
 value = "hello_world"
-CaseTransform.dash(value) # => hello-world
+CaseTransform2.dash(value) # => hello-world
 
 value = "helloWorld"
-CaseTransform.underscore(value) # => hello_world
+CaseTransform2.underscore(value) # => hello_world
 ```
 
 `value` can be any of Array, Hash, Symbol, or String.
@@ -69,6 +75,6 @@ Any other object type will just be returned.
 
 ## NOTE
 
-There is no `CaseTransform.unaltered` method like the original gem has
+There is no `CaseTransform2.unaltered` method like the original gem has
 
 License: See LICENSE.txt file

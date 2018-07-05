@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module CaseTransform
+module CaseTransform2
   # @api private
   class HashExt
     def deep_transform_keys!(object, &block)

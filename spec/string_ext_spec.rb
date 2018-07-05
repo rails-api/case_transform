@@ -5,7 +5,7 @@ require "spec_helper"
 # Stolen from active support test case
 # https://github.com/rails/rails/blob/78fc8530d4aa3d5d82da78fc0a763ff1d0553121/activesupport/test/inflector_test_cases.rb
 
-RSpec.describe CaseTransform::StringExt do
+RSpec.describe CaseTransform2::StringExt do
   let(:camel_to_underscore) do
     {
       "Product"               => "product",

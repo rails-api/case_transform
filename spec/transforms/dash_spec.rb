@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require("spec_helper")
-RSpec.describe(CaseTransform) do
+RSpec.describe(CaseTransform2) do
   describe("Transforms") do
     describe("dash") do
       it("transforms to dash (hyphenated words)") do
@@ -37,7 +37,7 @@ RSpec.describe(CaseTransform) do
             expected: [{ "some-value" => "value" }] }
         ]
         scenarios.each do |s|
-          result = CaseTransform.dash(s[:value])
+          result = CaseTransform2.dash(s[:value])
           expect(result).to(eq(s[:expected]))
         end
       end

@@ -2,7 +2,7 @@
 
 require("spec_helper")
 
-RSpec.describe(CaseTransform) do
+RSpec.describe(CaseTransform2) do
   describe("Transforms") do
     describe("underscore") do
       it("transforms to underscore (snake case)") do
@@ -40,7 +40,7 @@ RSpec.describe(CaseTransform) do
             expected: [{ "some_value" => "value" }] }
         ]
         scenarios.each do |s|
-          result = CaseTransform.underscore(s[:value])
+          result = CaseTransform2.underscore(s[:value])
           expect(result).to(eq(s[:expected]))
         end
       end

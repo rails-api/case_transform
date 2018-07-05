@@ -2,11 +2,11 @@
 
 lib = File.expand_path("lib", __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "case_transform/version"
+require "case_transform2/version"
 
 Gem::Specification.new do |s|
   s.name        = "case_transform2"
-  s.version     = CaseTransform::VERSION
+  s.version     = CaseTransform2::VERSION
   s.license     = "MIT"
   s.authors     = ["L. Preston Sego III", "Ben Mills", "Saiqul Haq"]
   s.email       = "saiqulhaq@gmail.com"

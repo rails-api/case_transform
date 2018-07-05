@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module CaseTransform
+module CaseTransform2
   # String class extension
   # Stolen from ActiveSupport::Inflector.camelize
   # @api private
