@@ -2,16 +2,9 @@ name: Test Coverage
 
 on:
   push:
-    branches:
-      - master
-    tags:
-      - '!*' # Do not execute on tags
-    paths:
-      - lib/*
-      - spec/*
+    branches: [ master ]
   pull_request:
-    paths:
-      - '!*.MD'
+    branches: [ master ]
 
 jobs:  
   coverage:
