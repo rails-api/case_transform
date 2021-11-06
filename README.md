@@ -12,7 +12,7 @@
 
 # case_transform2
 
-[![Build Status](https://travis-ci.org/saiqulhaq/case_transform.svg?branch=master)](https://travis-ci.org/saiqulhaq/case_transform)
+![Test Workflow](https://github.com/saiqulhaq/case_transform/actions/workflows/github-actions.yml/badge.svg)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0050890b14e7f9165680/test_coverage)](https://codeclimate.com/github/saiqulhaq/case_transform/test_coverage)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0050890b14e7f9165680/maintainability)](https://codeclimate.com/github/saiqulhaq/case_transform/maintainability)
 
