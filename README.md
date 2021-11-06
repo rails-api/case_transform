@@ -1,12 +1,12 @@
 <!-- vim-markdown-toc GFM -->
 
 + [case_transform2](#case_transform2)
-        * [Why](#why)
-        * [Install](#install)
-        * [Warning](#warning)
-        * [Usage](#usage)
-        * [Transforms](#transforms)
-        * [NOTE](#note)
+  * [Why](#why)
+  * [Install](#install)
+  * [Warning](#warning)
+  * [Usage](#usage)
+  * [Transforms](#transforms)
+  * [NOTE](#note)
 
 <!-- vim-markdown-toc -->
 
@@ -72,6 +72,11 @@ Any other object type will just be returned.
 | camel_lower | camelCase |
 | dash | dash-case |
 | underscore | under_score |
+
+## Ruby Version Support
+
+See `.github/workflows/github-actions.yml` to find out the latest Ruby version support
+The target is above 2.6 and above
 
 ## NOTE
 
