@@ -17,11 +17,12 @@ jobs:
       with:
         ruby-version: 2.7
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - name: Run test
-      run: COVERAGE=1 bundle exec rspec
-    - name: Publish code coverage
+    - name: Run test & publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
+      coverageCommand:
       env:
         CC_TEST_REPORTER_ID: 945dfb58a832d233a3caeb84e3e6d3be212e8c7abcb48117fce63b9adcb43647
+        COVERAGE: 1
       with:
+        coverageCommand: bundle exec rspec
         coverageLocations: coverage/index.html:simplecov
