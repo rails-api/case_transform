@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
+require 'simplecov'
+SimpleCov.start if ENV["COVERAGE"]
+
 require 'case_transform2'
 
 RSpec.configure do |config|

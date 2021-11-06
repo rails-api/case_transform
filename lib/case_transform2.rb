@@ -5,7 +5,6 @@ require 'case_transform2/string_ext'
 require 'case_transform2/version'
 
 # Lightweight version of Case Transform gem
-# but without unaltered method
 module CaseTransform2
   class << self
     # Transforms values to UpperCamelCase or PascalCase.
@@ -82,6 +81,11 @@ module CaseTransform2
       else
         value
       end
+    end
+
+    # Returns the value unaltered
+    def unaltered(value)
+      value
     end
 
     private
