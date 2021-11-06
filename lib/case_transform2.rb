@@ -4,13 +4,15 @@ require 'case_transform2/hash_ext'
 require 'case_transform2/string_ext'
 require 'case_transform2/version'
 
+# Lightweight version of Case Transform gem
+# but without unaltered method
 module CaseTransform2
   class << self
     # Transforms values to UpperCamelCase or PascalCase.
     #
     # @example
     #    "some_key" => "SomeKey",
-    def camel(value)
+    def camel(value) # rubocop:disable Metrics/MethodLength
       case value
       when Array
         value.map { |item| camel(item) }
@@ -29,7 +31,7 @@ module CaseTransform2
     #
     # @example
     #    "some_key" => "someKey",
-    def camel_lower(value)
+    def camel_lower(value) # rubocop:disable Metrics/MethodLength
       case value
       when Array
         value.map { |item| camel_lower(item) }
@@ -48,7 +50,7 @@ module CaseTransform2
     #
     # @example
     #    "some_key" => "some-key",
-    def dash(value)
+    def dash(value) # rubocop:disable Metrics/MethodLength
       case value
       when Array
         value.map { |item| dash(item) }
@@ -67,7 +69,7 @@ module CaseTransform2
     #
     # @example
     #    "some-key" => "some_key",
-    def underscore(value)
+    def underscore(value) # rubocop:disable Metrics/MethodLength
       case value
       when Array
         value.map { |item| underscore(item) }
