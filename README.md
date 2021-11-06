@@ -1,12 +1,12 @@
 <!-- vim-markdown-toc GFM -->
 
 + [case_transform2](#case_transform2)
-        * [Why](#why)
-        * [Install](#install)
-        * [Warning](#warning)
-        * [Usage](#usage)
-        * [Transforms](#transforms)
-        * [NOTE](#note)
+  * [Why](#why)
+  * [Install](#install)
+  * [Warning](#warning)
+  * [Usage](#usage)
+  * [Transforms](#transforms)
+  * [NOTE](#note)
 
 <!-- vim-markdown-toc -->
 
@@ -73,8 +73,9 @@ Any other object type will just be returned.
 | dash | dash-case |
 | underscore | under_score |
 
-## NOTE
+## Ruby Version Support
 
-There is no `CaseTransform2.unaltered` method like the original gem has
+See `.github/workflows/github-actions.yml` to find out the latest Ruby version support
+The target is above 2.5 and above
 
 License: See LICENSE.txt file

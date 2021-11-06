@@ -9,10 +9,10 @@ module CaseTransform2
 
     private
 
-    def _deep_transform_keys_in_object!(object, &block)
+    def _deep_transform_keys_in_object!(object, &block) # rubocop:disable Metrics/MethodLength
       case object
       when Hash
-        object.keys.each do |key|
+        object.keys.each do |key| # rubocop:disable Style/HashEachMethods
           value = object.delete(key)
           object[yield(key)] = _deep_transform_keys_in_object!(value, &block)
         end
