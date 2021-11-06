@@ -76,10 +76,6 @@ Any other object type will just be returned.
 ## Ruby Version Support
 
 See `.github/workflows/github-actions.yml` to find out the latest Ruby version support
-The target is above 2.6 and above
-
-## NOTE
-
-There is no `CaseTransform2.unaltered` method like the original gem has
+The target is above 2.5 and above
 
 License: See LICENSE.txt file
