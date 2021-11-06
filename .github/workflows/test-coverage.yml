@@ -1,6 +1,7 @@
 name: Test Coverage
 
-push:
+on:
+  push:
     branches:
       - master
     tags:
