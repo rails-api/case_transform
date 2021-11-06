@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require "case_transform2/hash_ext"
-require "case_transform2/string_ext"
-require "case_transform2/version"
+require 'case_transform2/hash_ext'
+require 'case_transform2/string_ext'
+require 'case_transform2/version'
 
 module CaseTransform2
   class << self

@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  app:
+    tty: true # Enables debugging capabilities when attached to this container.
+    image: bitnami/ruby:2.7
+    # command: "sh -c 'bundle install && bundle exec rspec'"
+    volumes:
+      - .:/app # docker run -it --name ruby bitnami/ruby:2.7-prod
