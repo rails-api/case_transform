@@ -2,7 +2,7 @@
 
 require 'bundler/setup'
 require 'simplecov'
-SimpleCov.start if ENV["COVERAGE"]
+SimpleCov.start if ENV['COVERAGE']
 
 require 'case_transform2'
 
