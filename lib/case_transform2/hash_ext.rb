@@ -12,7 +12,7 @@ module CaseTransform2
     def _deep_transform_keys_in_object!(object, &block)
       case object
       when Hash
-        object.keys.each do |key|
+        object.each_key do |key|
           value = object.delete(key)
           object[yield(key)] = _deep_transform_keys_in_object!(value, &block)
         end

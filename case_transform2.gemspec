@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email       = 'saiqulhaq@gmail.com'
   s.homepage    = 'https://github.com/saiqulhaq/case_transform'
   s.summary     = 'Transforms string letter case to camel, snake, dash and underscore without activesupport dependencies'
-  s.description = s.summary + '. Forked from https://github.com/rails-api/case_transform'
+  s.description = "#{s.summary}. Forked from https://github.com/rails-api/case_transform"
   s.metadata['yard.run'] = 'yri'
   s.files = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
